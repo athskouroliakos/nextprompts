@@ -21,19 +21,19 @@ const handler = NextAuth({
     async signIn({ user, account, profile, email, credentials }) {
       try {
         await connectToDB();
-        const userExists = await User.findOne({ email: profile?.email });
+        const userExists = await User.findOne({ email: profile.email });
         // if not, create a new document and save user in MongoDB
-        if (userExists === null) {
+        if (!userExists) {
           await User.create({
             email: profile?.email,
-            username: profile?.name.replace(/ /g, '').toLowerCase(),
-            image: user.image,
+            username: profile?.name.replace(' ', '').toLowerCase(),
+            image: profile.image,
           });
         }
 
         return true;
       } catch (error) {
-        console.log(error);
+        console.log('Error checking if user exists: ', error.message);
         return false;
       }
     },

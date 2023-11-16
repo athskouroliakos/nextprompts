@@ -25,7 +25,7 @@ const handler = NextAuth({
         // if not, create a new document and save user in MongoDB
         if (!userExists) {
           await User.create({
-            email: profile?.email,
+            email: profile.email,
             username: profile?.name.replace(' ', '').toLowerCase(),
             image: profile.image,
           });

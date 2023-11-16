@@ -10,7 +10,7 @@ const page = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const [sumbitting, setIsSumbitting] = useState(false);
+  const [sumbitting, setIsSubmitting] = useState(false);
   const [post, setPost] = useState({
     prompt: '',
     tag: '',

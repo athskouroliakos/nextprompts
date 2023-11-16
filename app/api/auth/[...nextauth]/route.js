@@ -9,6 +9,7 @@ const handler = NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      checks: ['none'],
     }),
   ],
   callbacks: {
@@ -25,7 +26,7 @@ const handler = NextAuth({
         // if not, create a new document and save user in MongoDB
         if (!userExists) {
           await User.create({
-            email: profile.email,
+            email: profile?.email,
             username: profile?.name.replace(' ', '').toLowerCase(),
             image: profile.image,
           });
